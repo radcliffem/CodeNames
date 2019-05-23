@@ -3,9 +3,11 @@ An in-person, party game style implementation of the popular board game "CodeNam
 
 To play, both machines need to have the code. One machine will belong to the CodeMakers, the other machine to the CodeBreakers.
 
-The CodeMakers open up RunGame.html, click "Maker" and enter their names. The blue player always goes first.
+Both parties agree on a name for their game. It must be entered exactly the same way on both computers to work.
 
-The CodeBreakers then open the same file, click "Breaker." They can then choose to add additional words to the basic package of words (some categories are given as examples, but users can add categories to words.js).
+The CodeMakers open up RunGame.html, enter the name of the game, then click "Maker" and enter their names. The blue player always goes first.
+
+The CodeBreakers then open the same file, enter the name of the game, and click "Breaker." They can then choose to add additional words to the basic package of words (some categories are given as examples, but users can add categories to words.js).
 
 The playing board then appears. The blue codeMaker's job is to try to get the breakers to guess the blue words, and the red codeMaker's job is to try to get the breakers to guess the red words. If the assassin word is guessed at anytime, that team automatically loses.
 
