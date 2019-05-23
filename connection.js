@@ -1,6 +1,20 @@
 var peer;
 var num="";
 var BtoM;
+var gameId="";
+
+
+document.getElementById("nameGame").onclick = function(){
+	gameId=document.getElementById("gameid").value;
+	turnOff(document.getElementsByName("setup"));
+	turnOn(document.getElementsByName("initial"));
+}
+
+console.log(gameId);
+
+
+
+
 
 //This function runs if the user indicates they are the Maker. The function 
 //turns on the Maker board element in the HTML, and waits for commands from 
@@ -13,7 +27,7 @@ document.getElementById("makerId").onclick = function (){
 	playerNames['blue'] = prompt("Please enter the name of the Blue player", "");
 	playerNames['red'] = prompt("Please enter the name of the Red player","");
 	
-	peer = new Peer("IAmMaker");
+	peer = new Peer("IAmMaker"+gameId);
 	peer.on('connection', function(conn) {
 		
 		conn.send(playerNames);
@@ -76,8 +90,8 @@ document.getElementById("breakerId").onclick=function (){
 	}
 	
 	function makeConnection(wordData){
-		peer = new Peer("IAmBreaker");
-		BtoM=peer.connect("IAmMaker");
+		peer = new Peer("IAmBreaker"+gameId);
+		BtoM=peer.connect("IAmMaker"+gameId);
 		BtoM.on('open',function(){
 
 			BtoM.send(["hello"]);
