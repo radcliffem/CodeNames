@@ -11,4 +11,6 @@ The playing board then appears. The blue codeMaker's job is to try to get the br
 
 On each turn, the codeMaker whose turn it is gives a clue, which must be one word (two words are permitted if they are part of a common noun, like "outer space" or "Gordon Ramsay"), and a number. For example, they could say "planets, 2." This communicates to the breakers that there are two words in that codeMaker's color that relate to the clue "planets." The breakers click on words to guess them.
 
+A player wins if all their words are guessed, or if the other team clicks on the assassin.
+
 Obviously there are some bugs to be worked out, but the game is ready to play. Enjoy!
