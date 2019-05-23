@@ -1,5 +1,5 @@
 # CodeNames
-An in-person, party game style implementation of the popular board game "CodeNames" that can be played on any two machines, in the same room, with an internet connection.
+An in-person, party game style implementation of the popular board game "CodeNames" that can be played on any two machines, in the same room, with an internet connection. The connection uses the peerJS library, which can be found at https://peerjs.com/index.html. My greatest thanks to tantalor (tantalor.github.com) for his help in getting this project moving.
 
 To play, both machines need to have the code. One machine will belong to the CodeMakers, the other machine to the CodeBreakers.
 
