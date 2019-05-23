@@ -1,0 +1,36 @@
+
+<script src="words.js"></script>
+<center>
+	<br>
+	<br>
+	<p name="initial"> Hello! Are you the codemaker or the codebreaker?</p>
+	<button name="initial" id="makerId" type="radio">Maker</button>
+	<button name="initial" id="breakerId" type="radio">Breaker</button>
+
+	<script src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js"></script>
+	<script src="connection.js"></script>
+	<script src="makerCode.js"></script>
+	<script src="breakerCode.js"></script>
+	<script src="util.js"></script>
+
+	<table style = "display:none" name="isMaker" border="1" width="300" id="MakerBoard">
+	</table>
+	
+	<p name="pickCategories" style="display:none">In addition to the basic set of words, what other kinds of words would you like?</p>
+	<table border="0" style="display:none" id="selection" name="pickCategories"></table>
+	<button name="pickCategories" type="button" style="display:none" id="submitCategories">Submit</button>
+	
+	<table border="1" width="390" id="BreakerBoard" name="isBreaker" style="display:none">
+	</table>
+
+<br>
+
+<div name="playing" id="turn" style="display:none; border:5px solid black">
+	<p name="playing" id="turnText" style="display:none" > </p>
+	<button name="isBreaker" type="button" style="display:none" id="endTurn">End Turn</button></div>
+
+<br>
+
+	<table border="0" width="390" id="wordsRemaining" name="isBreaker" style="display:none"></table>
+
+</center>
