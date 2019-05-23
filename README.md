@@ -9,7 +9,7 @@ The CodeBreakers then open the same file, click "Breaker." They can then choose 
 
 The playing board then appears. The blue codeMaker's job is to try to get the breakers to guess the blue words, and the red codeMaker's job is to try to get the breakers to guess the red words. If the assassin word is guessed at anytime, that team automatically loses.
 
-On each turn, the codeMaker whose turn it is gives a clue, which must be one word (two words are permitted if they are part of a common noun, like "outer space" or "Gordon Ramsay"), and a number. For example, they could say "planets, 2." This communicates to the breakers that there are two words in that codeMaker's color that relate to the clue "planets." The breakers click on words to guess them.
+On each turn, the codeMaker whose turn it is gives a clue, which must be one word (two words are permitted if they are part of a common noun, like "outer space" or "Gordon Ramsay"), and a number. For example, they could say "planets, 2." This communicates to the breakers that there are two words in that codeMaker's color that relate to the clue "planets." The breakers click on words to guess them. Breakers can make as many guesses as they like in a turn, or they can end their turn when they feel they have all the words.
 
 A player wins if all their words are guessed, or if the other team clicks on the assassin.
 
