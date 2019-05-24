@@ -45,7 +45,7 @@ document.getElementById("makerId").onclick = function (){
 				makeMaker(data[1],data[2]);
 			}else if(data[0]=="turn"){
 				makeTurn();
-			}elseif(data[0]=="goodbye"){
+			}else if(data[0]=="goodbye"){
 				document.write("Goodbye!");
 			}else if(data[0]=="wins"){
 				wins(data[1]);
