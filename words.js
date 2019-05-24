@@ -57,9 +57,12 @@ var categories = {"Marvel":["Captain Marvel",
 "Minecraft",
 "Roblox",
 "Tetris",
-"Mario",
 "Super Mario 3D World",
-"Pikmin"
+"Pikmin",
+"Pokemon",
+"Candy Crush",
+"Surviving Mars",
+"Zelda"
 ],
 
 "animals":[
