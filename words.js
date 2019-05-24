@@ -62,16 +62,20 @@ var categories = {"Marvel":["Captain Marvel",
 "Pikmin"
 ],
 
-"animals":["puppy", 
+"animals":[
+"cat",
+"puppy", 
 "kitten",
 "orangutan",
 "whale",
 "octopus",
-"shark"]
+"shark",
+"fish",
+"butterfly"]
 }
 
 
-var basic = ["fish",
+var basic = [
 "baby", 
 "France",
 "metal",
@@ -132,7 +136,6 @@ var basic = ["fish",
 "rice",
 "noodles",
 "treehouse",
-"butterfly",
 "salt",
 "cube",
 "circle",
