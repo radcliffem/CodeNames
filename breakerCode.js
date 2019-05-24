@@ -4,6 +4,10 @@
 //allows the Breaker to end their turn.
 
 function makeBreaker(){
+	turnOff(document.getElementsByName("ending"));
+	turnOn(document.getElementsByName("isBreaker"));
+	turnOn(document.getElementsByName("BreakerCounts"));
+	document.getElementById("endGameText").innerText="Would you like to play again?"
 	turnOn(document.getElementsByName("playing"));
 	document.getElementById("turn").style.width="200px"
 	document.getElementById("turn").style.borderColor="blue";
@@ -74,8 +78,67 @@ function setColors(){
 
 }	
 
+//Runs endgame; asks player if they want to play again, sets up new board
+
+function BreakerWin(){
+	turnOff(document.getElementsByName("BreakerCounts"));
+	turnOff(document.getElementsByName("playing"));
+	turnOn(document.getElementsByName("ending"));
+	turnOn(document.getElementsByName("PlayAgain"));
+	document.getElementById("PlayYes").onclick=function(){
+		reset();
+		turnOff(document.getElementsByName("PlayAgain"));
+		turnOff(document.getElementsByName("isBreaker"));
+		document.getElementById("endGameText").innerText="Waiting for Maker..."
+		breakerBoard = document.getElementById("BreakerBoard");
+		while(breakerBoard.firstChild){
+			breakerBoard.removeChild(breakerBoard.firstChild);
+		}
+		breakerCount=document.getElementById("wordsRemaining");
+		while(breakerCount.firstChild){
+			breakerCount.removeChild(breakerCount.firstChild);
+		}
+	}
+	document.getElementById("PlayNo").onclick=function(){
+		BtoM.send("goodbye");
+		document.write("Goodbye!");
+	}
+	
+}
 
 
 
 
+//Adds the table of how many words are left on Breaker's board
+
+function createRemainingCount(){
+	countWords = document.getElementById("wordsRemaining");
+	Header = document.createElement("TR");
+	headElement = document.createElement("TD");
+	headElement.innerText = "Words Remaining";
+	Header.appendChild(headElement);
+	countWords.appendChild(Header);
+	
+	countWords.appendChild(countRow("blue","Blue"));
+	countWords.appendChild(countRow("red","Red"));
+	countWords.appendChild(countRow("grey","Grey"));
+	
+	document.getElementById("greyCountRow").style.display="none"
+	
+}
+
+//Rows for breaker count table
+
+function countRow(color, capColor){
+	newRow = document.createElement("TR");
+	newRow.setAttribute("id",color+"CountRow");
+	rowLabel=document.createElement("TD");
+	rowLabel.innerText = capColor;
+	rowCount = document.createElement("TD");
+	rowCount.setAttribute("id", color+"Count");
+	rowCount.innerText = words[color].length;
+	newRow.appendChild(rowLabel);
+	newRow.appendChild(rowCount);
+	return newRow;
+}
 

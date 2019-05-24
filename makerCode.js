@@ -1,6 +1,21 @@
+//Add elements to Maker Board
+
+function makerWord(color,ind){
+	newWord=document.createElement("TD");
+	newWord.setAttribute("name",color+"Word");
+	newWord.width="100";
+	newWord.innerText=words[color][ind];
+	newWord.setAttribute("id",words[color][ind]);
+	newWord.height="25";
+	return newWord;
+}
+
+
+
 //This function sets up the Maker Board. It is called whenever Breaker sends
 //initialization to Maker. The words and the corresponding color assignments
 //represented as a permutation are the input.
+
 
 function makeMaker(wordList,assassin){
 	turnOn(document.getElementsByName("playing"));
@@ -46,13 +61,125 @@ function makeMaker(wordList,assassin){
 //Shuffle buttons.
 
 function BreakerClick([color, word]){
-	makerWord=document.getElementById(word);
-	makerWord.bgColor=color;
-	makerWord.innerText="";
-	makerWord.setAttribute("name", "usedWord");
+	wordClick=document.getElementById(word);
+	wordClick.bgColor=color;
+	wordClick.innerText="";
+	wordClick.setAttribute("name", "usedWord");
 }
 
 
 
+//createClick adds the mechanism that interprets a selection on Breaker's
+//board. It changes the color of the corresponding cells on Breaker's board,
+//iterates the count, and sends relevant data to Maker to change color as well
 
 
+function createClick(color, element){
+	element.onclick=function (){
+		if(this.innerText!=""){
+			BtoM.send([color,this.innerText]);
+			count[color]+=1;
+			this.bgColor=color;
+			this.innerText="";
+			document.getElementById(color+"Count").innerText = words[color].length-count[color];
+			
+			if(players[turn]!=color){
+				setTimeout(endTurn,100);
+			}else{
+				if(count[color]==words[color].length){
+					setTimeout(wins,100,color);
+					BtoM.send(["wins",color]);
+				}
+			}
+		}
+	}
+}
+
+
+
+//Add the assassin row for Maker
+
+function makerAssassin(element,word){
+	newRow=document.createElement("TR");
+	Assassin=document.createElement("TD");
+	Assassin.name="";
+	Assassin.bgColor="yellow";
+	Assassin.setAttribute("colspan","2");
+	Assassin.innerText="Assassin:"
+	AssassinWord=document.createElement("TD");
+	AssassinWord.name="";
+	AssassinWord.bgColor="yellow";
+	AssassinWord.innerText=word;
+	assassin=word;
+	
+	newRow.appendChild(Assassin);
+	newRow.appendChild(AssassinWord);	
+	element.appendChild(newRow);
+}
+
+//Add the header row for Maker
+
+function headerRow(element){
+	headRow=document.createElement("TR");
+	blueHead=document.createElement("TH");
+	blueHead.innerText="Blue"
+
+	redHead=document.createElement("TH");
+	redHead.innerText="Red"
+
+	greyHead=document.createElement("TH");
+	greyHead.innerText="Grey"
+
+	headRow.appendChild(blueHead);
+	headRow.appendChild(redHead);
+	headRow.appendChild(greyHead);
+	element.appendChild(headRow);
+	
+}
+
+//Add the shuffleButtons for maker
+
+function shuffleButtons(element){
+	buttonRow=document.createElement("TR");
+	blueShuffle=document.createElement("TD");
+	blueButton=document.createElement("BUTTON");
+	blueButton.type="button";
+	blueButton.id="blueShuffle";
+	blueButton.innerText="Shuffle";
+	blueShuffle.appendChild(blueButton);
+	blueShuffle.onclick = function (){
+		shuffle("blue");
+	}
+	buttonRow.appendChild(blueShuffle);
+	
+	
+	
+	redShuffle=document.createElement("TD");
+	redButton=document.createElement("BUTTON");
+	redButton.type="button";
+	redButton.id="redShuffle";
+	redButton.innerText="Shuffle";
+	redShuffle.appendChild(redButton);
+	redShuffle.onclick = function (){
+		shuffle("red")
+	}
+	buttonRow.appendChild(redShuffle);
+	
+	MakeBoard.appendChild(buttonRow);
+	
+}
+
+//onclick shuffle function
+
+function shuffle(color){
+	var reorder = document.getElementsByName(color+"Word");
+	var toPerm = [];
+	for(var j=0;j<reorder.length;j++){
+		toPerm.push(reorder[j].innerText);
+	}
+	addWords=permute(toPerm);
+	for(var i=0;i<reorder.length;i++){
+		reorder[i].innerText=addWords[i];
+		reorder[i].id=addWords[i];
+	}
+}
