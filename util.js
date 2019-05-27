@@ -6,6 +6,24 @@ var count={'blue':0,'grey':0,'red':0};
 var wordData=[];
 var playerNames = {'blue':"",'red':""};
 
+
+//These functions are used to control which HTML elements are hidden or not 
+//throughout gameplay.
+
+
+function turnOn(elements){
+	for(var i=0;i<elements.length;i++){
+		elements[i].style.display="block";
+	}
+}
+
+function turnOff(elements){
+	for(var i=0;i<elements.length;i++){
+		elements[i].style.display="none";
+	}
+}
+
+
 //Below are the routinely used functions
 
 function reset(){

@@ -4,14 +4,17 @@
 	<br>
 	<br>
 	
-	<p name="setup"> Hello! What is the name of your game?</p>
-	<input type="text" name="setup" value="" id="gameid"></input>
-	<button type="button" name="setup" value="Submit" id="nameGame">Submit</button>
+	<p name="initial"> Hello! What is the name of your game?</p>
+	<input type="text" name="initial" value="" id="gameid"></input>
+
 	
 	
-	<p name="initial" style = "display:none"> Hello! Are you the codemaker or the codebreaker?</p>
-	<button name="initial" style = "display:none" id="makerId" type="radio">Maker</button>
-	<button name="initial" style = "display:none" id="breakerId" type="radio">Breaker</button>
+	<p name="initial"> Are you the codemaker or the codebreaker?</p>
+	<button name="initial" id="makerId" type="radio">Maker</button>
+	<button name="initial"  id="breakerId" type="radio">Breaker</button>
+	<br><br>
+	<p name="warning" id="warning">Important! The codemaker must log in first! Once the codemaker is ready, a bell will ring and the codebreaker can log in.</p>
+	<audio id="audio" src="ding.mp3" autostart="false"></audio>
 
 	<script src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js"></script>
 	<script src="connection.js"></script>

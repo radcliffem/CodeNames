@@ -1,15 +1,10 @@
 var peer;
 var num="";
 var BtoM;
+var MtoB;
 var gameId="";
 var who="";
 
-
-document.getElementById("nameGame").onclick = function(){
-	gameId=document.getElementById("gameid").value;
-	turnOff(document.getElementsByName("setup"));
-	turnOn(document.getElementsByName("initial"));
-}
 
 
 
@@ -22,13 +17,18 @@ document.getElementById("nameGame").onclick = function(){
 //Maker doesn't do anything without a signal from Breaker.
 
 document.getElementById("makerId").onclick = function (){
+	gameId=document.getElementById("gameid").value;
 	who="maker";
-	turnOff(document.getElementsByName("initial"));
-	turnOn(document.getElementsByName("isMaker"));
-	
+	peer = new Peer("IAmMaker"+gameId);	
 	playerNames = getNames();
 	
-	peer = new Peer("IAmMaker"+gameId);
+	document.getElementById("audio").play()
+	turnOff(document.getElementsByName("initial"));
+	document.getElementById("warning").innerText="waiting for Breaker..."
+	turnOn(document.getElementsByName("isMaker"));
+	
+	
+	
 	peer.on('connection', function(conn) {
 				
 		conn.on('data',function(data){
@@ -42,6 +42,7 @@ document.getElementById("makerId").onclick = function (){
 			if(data[0]=="hello"){
 				conn.send(playerNames);
 			}else if(data[0]=="initialize"){
+				turnOff(document.getElementsByName("warning"));
 				makeMaker(data[1],data[2]);
 			}else if(data[0]=="turn"){
 				makeTurn();
@@ -58,6 +59,7 @@ document.getElementById("makerId").onclick = function (){
 				}
 				
 				document.getElementById("PlayYes").onclick=function(){
+					conn.send("new");
 					turnOff(document.getElementsByName("isMaker"));
 					var makerBoard=document.getElementById("MakerBoard");
 					while(makerBoard.firstChild){
@@ -98,9 +100,29 @@ document.getElementById("makerId").onclick = function (){
 //send data to Maker.
 
 document.getElementById("breakerId").onclick=function (){
+	gameId=document.getElementById("gameid").value;
 	who="breaker";
 	turnOff(document.getElementsByName("initial"));
+	turnOff(document.getElementsByName("warning"));
 	turnOn(document.getElementsByName("pickCategories"));
+	
+	peer = new Peer("IAmBreaker"+gameId);
+	
+	BtoM=peer.connect("IAmMaker"+gameId);
+	
+	BtoM.on('open',function(){
+		
+		BtoM.on('data',function(data){
+			if(data=="new"){
+				NewGame();
+			}else{
+				playerNames=data;
+				makeBreaker();
+				setColors();
+			}
+		});
+	});
+	
 	
 	addCategories();
 	
@@ -114,47 +136,15 @@ document.getElementById("breakerId").onclick=function (){
 		}
 		
 		turnOff(document.getElementsByName("pickCategories"));
+				
+		BtoM.send(["hello"]);
 		
-	
-		makeConnection(wordData);
-		
 	}
 	
-	function makeConnection(wordData){
-		peer = new Peer("IAmBreaker"+gameId);
-		BtoM=peer.connect("IAmMaker"+gameId);
-		BtoM.on('open',function(){
 
-			BtoM.send(["hello"]);
-
-			BtoM.on('data',function(data){
-				playerNames=data;
-				makeBreaker();
-				setColors();
-			})
-		});
-	}
-	
-	
 	
 }
 
-
-//These functions are used to control which HTML elements are hidden or not 
-//throughout gameplay.
-
-
-function turnOn(elements){
-	for(var i=0;i<elements.length;i++){
-		elements[i].style.display="block";
-	}
-}
-
-function turnOff(elements){
-	for(var i=0;i<elements.length;i++){
-		elements[i].style.display="none";
-	}
-}
 
 
 

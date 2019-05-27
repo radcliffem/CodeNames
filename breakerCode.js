@@ -86,18 +86,7 @@ function BreakerWin(){
 	turnOn(document.getElementsByName("ending"));
 	turnOn(document.getElementsByName("PlayAgain"));
 	document.getElementById("PlayYes").onclick=function(){
-		reset();
-		turnOff(document.getElementsByName("PlayAgain"));
-		turnOff(document.getElementsByName("isBreaker"));
-		document.getElementById("endGameText").innerText="Waiting for Maker..."
-		breakerBoard = document.getElementById("BreakerBoard");
-		while(breakerBoard.firstChild){
-			breakerBoard.removeChild(breakerBoard.firstChild);
-		}
-		breakerCount=document.getElementById("wordsRemaining");
-		while(breakerCount.firstChild){
-			breakerCount.removeChild(breakerCount.firstChild);
-		}
+		NewGame();
 	}
 	document.getElementById("PlayNo").onclick=function(){
 		BtoM.send("goodbye");
@@ -106,6 +95,21 @@ function BreakerWin(){
 	
 }
 
+//Set Up New Game
+function NewGame(){
+	reset();
+	turnOff(document.getElementsByName("PlayAgain"));
+	turnOff(document.getElementsByName("isBreaker"));
+	document.getElementById("endGameText").innerText="Waiting for Maker..."
+	breakerBoard = document.getElementById("BreakerBoard");
+	while(breakerBoard.firstChild){
+		breakerBoard.removeChild(breakerBoard.firstChild);
+	}
+	breakerCount=document.getElementById("wordsRemaining");
+	while(breakerCount.firstChild){
+		breakerCount.removeChild(breakerCount.firstChild);
+	}
+}
 
 
 
