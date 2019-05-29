@@ -112,6 +112,31 @@ function NewGame(){
 }
 
 
+//createClick adds the mechanism that interprets a selection on Breaker's
+//board. It changes the color of the corresponding cells on Breaker's board,
+//iterates the count, and sends relevant data to Maker to change color as well
+
+
+function createClick(color, element){
+	element.onclick=function (){
+		if(this.innerText!=""){
+			BtoM.send([color,this.innerText]);
+			count[color]+=1;
+			this.bgColor=color;
+			this.innerText="";
+			document.getElementById(color+"Count").innerText = words[color].length-count[color];
+			
+			if(count[color]==words[color].length){
+				setTimeout(wins,100,color);
+				BtoM.send(["wins",color]);
+			}else if(players[turn]!=color){
+				setTimeout(endTurn,100);
+			}
+			
+		}
+	}
+}
+
 
 //Adds the table of how many words are left on Breaker's board
 
