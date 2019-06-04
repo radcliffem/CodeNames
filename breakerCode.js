@@ -12,7 +12,7 @@ function makeBreaker(){
 	document.getElementById("turn").style.width="200px"
 	document.getElementById("turn").style.borderColor="blue";
 	
-	BreakBoard=document.getElementById("BreakerBoard");
+	var BreakBoard=document.getElementById("BreakerBoard");
 	for(var i=0;i<5;i++){
 		newRow=document.createElement("TR");
 		for(var j=0;j<5;j++){
@@ -23,7 +23,7 @@ function makeBreaker(){
 	
 	document.getElementById("turnText").innerText="It is "+playerNames['blue']+"'s turn."
 	
-	document.getElementById("endTurn").onclick=function changeTurn(){
+	document.getElementById("endTurn").onclick=function (){
 		BtoM.send(["turn",turn]);
 		makeTurn(turn);
 	}
@@ -40,7 +40,7 @@ function setColors(){
 	for (var i = 0; i < wordElements.length; i++){
 	  numbers.push(i);
 	}
-	perms=permute(numbers);
+	var perms=permute(numbers);
 		
 	//create onclick functions
 	for(var i=0;i<9;i++){
@@ -69,6 +69,7 @@ function setColors(){
 		this.bgColor="black";
 		this.innerText="";
 		wins(players[(turn+1)%2]);
+		BreakerWin();
 		BtoM.send(["wins", players[(turn+1)%2]]);
 	}
 
@@ -102,13 +103,10 @@ function NewGame(){
 	turnOff(document.getElementsByName("isBreaker"));
 	document.getElementById("endGameText").innerText="Waiting for Maker..."
 	breakerBoard = document.getElementById("BreakerBoard");
-	while(breakerBoard.firstChild){
-		breakerBoard.removeChild(breakerBoard.firstChild);
-	}
+	breakerBoard.innerHTML="";
+	
 	breakerCount=document.getElementById("wordsRemaining");
-	while(breakerCount.firstChild){
-		breakerCount.removeChild(breakerCount.firstChild);
-	}
+	breakerCount.innerHTML="";
 }
 
 
@@ -125,6 +123,8 @@ function createClick(color, element){
 			this.bgColor=color;
 			this.innerText="";
 			document.getElementById(color+"Count").innerText = words[color].length-count[color];
+			//setTimeout is used here to ensure that the color on the board changes before 
+			//the functions wins or endTurn run, which will pop up an alert
 			
 			if(count[color]==words[color].length){
 				setTimeout(wins,100,color);
@@ -142,8 +142,8 @@ function createClick(color, element){
 
 function createRemainingCount(){
 	countWords = document.getElementById("wordsRemaining");
-	Header = document.createElement("TR");
-	headElement = document.createElement("TD");
+	var Header = document.createElement("TR");
+	var headElement = document.createElement("TD");
 	headElement.innerText = "Words Remaining";
 	Header.appendChild(headElement);
 	countWords.appendChild(Header);
@@ -159,7 +159,7 @@ function createRemainingCount(){
 //Rows for breaker count table
 
 function countRow(color, capColor){
-	newRow = document.createElement("TR");
+	var newRow = document.createElement("TR");
 	newRow.setAttribute("id",color+"CountRow");
 	rowLabel=document.createElement("TD");
 	rowLabel.innerText = capColor;
