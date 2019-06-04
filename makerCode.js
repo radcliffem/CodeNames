@@ -1,7 +1,7 @@
 //Add elements to Maker Board
 
 function makerWord(color,ind){
-	newWord=document.createElement("TD");
+	var newWord=document.createElement("TD");
 	newWord.setAttribute("name",color+"Word");
 	newWord.width="100";
 	newWord.innerText=words[color][ind];
@@ -34,7 +34,7 @@ function makeMaker(wordList,assassin){
 //Add the words from Breaker to the Maker Board. 
 
 	for(var i=0;i<7;i++){
-		newRow=document.createElement("TR");
+		var newRow=document.createElement("TR");
 		
 		newRow.appendChild(makerWord('blue',i));
 		newRow.appendChild(makerWord('red',i));
@@ -43,12 +43,12 @@ function makeMaker(wordList,assassin){
 		MakeBoard.appendChild(newRow);
 	}
 	
-	newRow=document.createElement("TR");
+	var newRow=document.createElement("TR");
 	newRow.appendChild(makerWord('blue',7));
 	newRow.appendChild(makerWord('red',7))
 	MakeBoard.appendChild(newRow);
 	
-	newRow=document.createElement("TR");
+	var newRow=document.createElement("TR");
 	newRow.appendChild(makerWord('blue',8));
 	MakeBoard.appendChild(newRow);
 	
@@ -76,8 +76,8 @@ function BreakerClick([color, word]){
 //Add the assassin row for Maker
 
 function makerAssassin(element,word){
-	newRow=document.createElement("TR");
-	Assassin=document.createElement("TD");
+	var newRow=document.createElement("TR");
+	var Assassin=document.createElement("TD");
 	Assassin.name="";
 	Assassin.bgColor="yellow";
 	Assassin.setAttribute("colspan","2");
@@ -96,14 +96,14 @@ function makerAssassin(element,word){
 //Add the header row for Maker
 
 function headerRow(element){
-	headRow=document.createElement("TR");
-	blueHead=document.createElement("TH");
+	var headRow=document.createElement("TR");
+	var blueHead=document.createElement("TH");
 	blueHead.innerText="Blue"
 
-	redHead=document.createElement("TH");
+	var redHead=document.createElement("TH");
 	redHead.innerText="Red"
 
-	greyHead=document.createElement("TH");
+	var greyHead=document.createElement("TH");
 	greyHead.innerText="Grey"
 
 	headRow.appendChild(blueHead);
@@ -116,9 +116,9 @@ function headerRow(element){
 //Add the shuffleButtons for maker
 
 function shuffleButtons(element){
-	buttonRow=document.createElement("TR");
-	blueShuffle=document.createElement("TD");
-	blueButton=document.createElement("BUTTON");
+	var buttonRow=document.createElement("TR");
+	var blueShuffle=document.createElement("TD");
+	var blueButton=document.createElement("BUTTON");
 	blueButton.type="button";
 	blueButton.id="blueShuffle";
 	blueButton.innerText="Shuffle";
@@ -130,8 +130,8 @@ function shuffleButtons(element){
 	
 	
 	
-	redShuffle=document.createElement("TD");
-	redButton=document.createElement("BUTTON");
+	var redShuffle=document.createElement("TD");
+	var redButton=document.createElement("BUTTON");
 	redButton.type="button";
 	redButton.id="redShuffle";
 	redButton.innerText="Shuffle";
